@@ -1,225 +1,91 @@
-<script setup>
-import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
-import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
-import Carousel from "./components/Carousel.vue";
-import CategoriesList from "./components/CategoriesList.vue";
-
-import US from "@/assets/img/icons/flags/US.png";
-import DE from "@/assets/img/icons/flags/DE.png";
-import GB from "@/assets/img/icons/flags/GB.png";
-import BR from "@/assets/img/icons/flags/BR.png";
-
-const sales = {
-  us: {
-    country: "United States",
-    sales: 2500,
-    value: "$230,900",
-    bounce: "29.9%",
-    flag: US,
-  },
-  germany: {
-    country: "Germany",
-    sales: "3.900",
-    value: "$440,000",
-    bounce: "40.22%",
-    flag: DE,
-  },
-  britain: {
-    country: "Great Britain",
-    sales: "1.400",
-    value: "$190,700",
-    bounce: "23.44%",
-    flag: GB,
-  },
-  brasil: {
-    country: "Brasil",
-    sales: "562",
-    value: "$143,960",
-    bounce: "32.14%",
-    flag: BR,
-  },
-};
-</script>
 <template>
   <div class="py-4 container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 col-12">
-            <mini-statistics-card
-              title="Today's Money"
-              value="$53,000"
-              description="<span
-                class='text-sm font-weight-bolder text-success'
-                >+55%</span> since yesterday"
-              :icon="{
-                component: 'ni ni-money-coins',
-                background: 'bg-gradient-primary',
-                shape: 'rounded-circle',
-              }"
-            />
-          </div>
-          <div class="col-lg-3 col-md-6 col-12">
-            <mini-statistics-card
-              title="Today's Users"
-              value="2,300"
-              description="<span
-                class='text-sm font-weight-bolder text-success'
-                >+3%</span> since last week"
-              :icon="{
-                component: 'ni ni-world',
-                background: 'bg-gradient-danger',
-                shape: 'rounded-circle',
-              }"
-            />
-          </div>
-          <div class="col-lg-3 col-md-6 col-12">
-            <mini-statistics-card
-              title="New Clients"
-              value="+3,462"
-              description="<span
-                class='text-sm font-weight-bolder text-danger'
-                >-2%</span> since last quarter"
-              :icon="{
-                component: 'ni ni-paper-diploma',
-                background: 'bg-gradient-success',
-                shape: 'rounded-circle',
-              }"
-            />
-          </div>
-          <div class="col-lg-3 col-md-6 col-12">
-            <mini-statistics-card
-              title="Sales"
-              value="$103,430"
-              description="<span
-                class='text-sm font-weight-bolder text-success'
-                >+5%</span> than last month"
-              :icon="{
-                component: 'ni ni-cart',
-                background: 'bg-gradient-warning',
-                shape: 'rounded-circle',
-              }"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-7 mb-lg">
-            <!-- line chart -->
-            <div class="card z-index-2">
-              <gradient-line-chart
-                id="chart-line"
-                title="Sales Overview"
-                description="<i class='fa fa-arrow-up text-success'></i>
-      <span class='font-weight-bold'>4% more</span> in 2021"
-                :chart="{
-                  labels: [
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec',
-                  ],
-                  datasets: [
-                    {
-                      label: 'Mobile Apps',
-                      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    },
-                  ],
-                }"
-              />
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <carousel />
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-lg-7 mb-lg-0 mb-4">
-            <div class="card">
-              <div class="p-3 pb-0 card-header">
-                <div class="d-flex justify-content-between">
-                  <h6 class="mb-2">Sales by Country</h6>
-                </div>
-              </div>
-              <div class="table-responsive">
-                <table class="table align-items-center">
-                  <tbody>
-                    <tr v-for="(sale, index) in sales" :key="index">
-                      <td class="w-30">
-                        <div class="px-2 py-1 d-flex align-items-center">
-                          <div>
-                            <img :src="sale.flag" alt="Country flag" />
-                          </div>
-                          <div class="ms-4">
-                            <p class="mb-0 text-xs font-weight-bold">
-                              Country:
-                            </p>
-                            <h6 class="mb-0 text-sm">{{ sale.country }}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-weight-bold">Sales:</p>
-                          <h6 class="mb-0 text-sm">{{ sale.sales }}</h6>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-weight-bold">Value:</p>
-                          <h6 class="mb-0 text-sm">{{ sale.value }}</h6>
-                        </div>
-                      </td>
-                      <td class="text-sm align-middle">
-                        <div class="text-center col">
-                          <p class="mb-0 text-xs font-weight-bold">Bounce:</p>
-                          <h6 class="mb-0 text-sm">{{ sale.bounce }}</h6>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <categories-list
-              :categories="[
-                {
-                  icon: {
-                    component: 'ni ni-mobile-button',
-                    background: 'dark',
-                  },
-                  label: 'Devices',
-                  description: '250 in stock <strong>346+ sold</strong>',
-                },
-                {
-                  icon: {
-                    component: 'ni ni-tag',
-                    background: 'dark',
-                  },
-                  label: 'Tickets',
-                  description: '123 closed <strong>15 open</strong>',
-                },
-                {
-                  icon: { component: 'ni ni-box-2', background: 'dark' },
-                  label: 'Error logs',
-                  description: '1 is active <strong>40 closed</strong>',
-                },
-                {
-                  icon: { component: 'ni ni-satisfied', background: 'dark' },
-                  label: 'Happy Users',
-                  description: '+ 430',
-                },
-              ]"
-            />
-          </div>
-        </div>
+    <div v-for="(pregunta, index) in preguntas" :key="index">
+      <p>Pregunta {{ index + 1 }}</p>
+      <label>Texto:</label>
+      <input v-model="pregunta.texto" type="text" />
+      <label>Tipo:</label>
+      <select v-model="pregunta.tipo">
+        <option :key v-for="(opc, key) in opc_tipo" :value="opc.nombre">{{opc.salida}}</option>
+      </select>
+      <label>Obligatoria:</label>
+      <input v-model="pregunta.obligatoria" type="checkbox" />
+      <label>Icono:</label>
+      <select v-model="pregunta.icono">
+        <option :key v-for="(opc, key) in opc_icon" :value="opc.nombre">{{opc.salida}}</option>
+      </select>
+      <label v-if="pregunta.tipo === 'opciones'">Opciones:</label>
+      <div v-if="pregunta.tipo === 'opciones'">
+        <input v-for="(opcion, i) in pregunta.opciones" :key="i" v-model="pregunta.opciones[i]" type="text" />
+        <button @click="agregarOpcion(index)">Agregar Opción</button>
       </div>
+      <label v-if="pregunta.tipo === 'rango'">Rango Máximo:</label>
+      <input v-if="pregunta.tipo === 'rango'" v-model="pregunta.rangoMaximo" type="number" />
+      <button @click="eliminarPregunta(index)">Eliminar Pregunta</button>
     </div>
+    <button @click="agregarPregunta">Agregar Pregunta</button>
+    <hr />
+    <button @click="guardarEstado">Guardar Estado</button>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      preguntas: [
+        {
+          texto: "",
+          tipo: "rango",
+          obligatoria: false,
+          icono: "star",
+          opciones: [],
+          rangoMaximo: 5
+        }
+      ],
+      opc_tipo:[{nombre:"rango",salida:"rango"},{nombre:"cerrado",salida:"cerrado"},{nombre:"abierto",salida:"abierto"},{nombre:"opciones",salida:"opciones"}],
+      opc_icon:[{nombre:"star",salida:"Estrella"},{nombre:"smile-beam",salida:"Sonrisa"},{nombre:"user",salida:"Usuario"},{nombre:"file-signature",salida:"Firma"},{nombre:"chart-pie",salida:"Gráfico"},{nombre:"users",salida:"Usuarios"},{nombre:"comments",salida:"Comentarios"}]
+    };
+  },
+  methods: {
+    agregarPregunta() {
+      this.preguntas.push({
+        texto: "",
+        tipo: "rango",
+        obligatoria: false,
+        icono: "star",
+        opciones: [],
+        rangoMaximo: 5
+      });
+    },
+    eliminarPregunta(index) {
+      this.preguntas.splice(index, 1);
+    },
+    agregarOpcion(index) {
+      this.preguntas[index].opciones.push("");
+    },
+    guardarEstado() {
+      // Aquí podrías enviar this.preguntas a tu servidor o almacenarlo localmente.
+      console.log(this.preguntas);
+    }
+  }
+};
+</script>
+
+<style scoped>
+.fa-icon {
+  font-family: 'Font Awesome 5 Free';
+}
+
+/* Estilos personalizados para los iconos */
+.fa-icon option {
+  padding-left: 20px; /* Espaciado a la izquierda para separar el icono del texto */
+  background-repeat: no-repeat; /* Evitar repetición del icono */
+  background-position: 3px 50%; /* Alinear el icono verticalmente */
+}
+
+/* Estilos para el texto junto al icono */
+.fa-icon option::before {
+  margin-right: 10px; /* Espaciado a la derecha para separar el icono del texto */
+}
+</style>
